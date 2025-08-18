@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PulsNet – Admin</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <script defer src="/admin.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">PulsNet</div>
+      <nav>
+        <a href="/">Dashboard</a>
+        <a href="/offline.html">Offline</a>
+        <a href="/admin.html" class="active">Admin</a>
+      </nav>
+    </header>
+    <main class="grid two">
+      <section class="card">
+        <h2>Theme</h2>
+        <div class="grid two">
+          <label>Primary <input type="color" id="primary" /></label>
+          <label>Accent <input type="color" id="accent" /></label>
+          <label>Warning <input type="color" id="warning" /></label>
+          <label>Danger <input type="color" id="danger" /></label>
+          <label>Background <input type="color" id="background" /></label>
+          <label>Surface <input type="color" id="surface" /></label>
+          <label>Text <input type="color" id="text" /></label>
+        </div>
+        <button class="btn" id="saveTheme">Save Theme</button>
+      </section>
+
+      <section class="card">
+        <h2>Polling</h2>
+        <label>Global Interval (s) <input id="interval" type="number" min="3" value="10" /></label>
+        <label>Cache (s) <input id="cache" type="number" min="1" value="5" /></label>
+        <label>Offline Threshold (s) <input id="offline" type="number" min="10" value="60" /></label>
+        <button class="btn" id="savePolling">Save Polling</button>
+      </section>
+
+      <section class="card">
+        <h2>Security</h2>
+        <label class="row"><input id="g2fa" type="checkbox" /> Global 2FA Required</label>
+        <button class="btn" id="save2fa">Save Security</button>
+      </section>
+
+      <section class="card">
+        <h2>Users</h2>
+        <form id="userForm" class="grid two">
+          <label>Username <input id="u" required /></label>
+          <label>Password <input id="p" type="password" required /></label>
+          <label>Role
+            <select id="r">
+              <option>User</option>
+              <option>Admin</option>
+            </select>
+          </label>
+          <label>Email <input id="e" type="email" /></label>
+          <button class="btn wide" type="submit">Create</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Devices</h2>
+        <form id="deviceForm" class="grid two">
+          <label>Client Name <input id="client" required /></label>
+          <label>Circuit Number <input id="circuit" required /></label>
+          <label>IP Address <input id="ip" required /></label>
+          <label>SNMP Community <input id="comm" value="public" required /></label>
+          <label>Max Link (Mbps) <input id="max" type="number" required /></label>
+          <label>Per-Client Interval (s, optional) <input id="pci" type="number" /></label>
+          <button class="btn wide" type="submit">Add Device</button>
+        </form>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
+
