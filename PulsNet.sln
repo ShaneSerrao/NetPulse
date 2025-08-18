@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{63D98454-AE0E-412B-8652-406EEBCF565F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PulsNet.Web", "src\PulsNet.Web\PulsNet.Web.csproj", "{D5AD71B3-2D21-4B7E-ABFA-6E6EB4FB3789}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E3B734C6-6D23-488C-A670-6FD35EF1E221}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PulsNet.Tests", "tests\PulsNet.Tests\PulsNet.Tests.csproj", "{17BC745D-4F2A-4AA3-82FB-83803D58CD20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5AD71B3-2D21-4B7E-ABFA-6E6EB4FB3789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5AD71B3-2D21-4B7E-ABFA-6E6EB4FB3789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5AD71B3-2D21-4B7E-ABFA-6E6EB4FB3789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5AD71B3-2D21-4B7E-ABFA-6E6EB4FB3789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17BC745D-4F2A-4AA3-82FB-83803D58CD20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17BC745D-4F2A-4AA3-82FB-83803D58CD20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17BC745D-4F2A-4AA3-82FB-83803D58CD20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17BC745D-4F2A-4AA3-82FB-83803D58CD20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D5AD71B3-2D21-4B7E-ABFA-6E6EB4FB3789} = {63D98454-AE0E-412B-8652-406EEBCF565F}
+		{17BC745D-4F2A-4AA3-82FB-83803D58CD20} = {E3B734C6-6D23-488C-A670-6FD35EF1E221}
+	EndGlobalSection
+EndGlobal

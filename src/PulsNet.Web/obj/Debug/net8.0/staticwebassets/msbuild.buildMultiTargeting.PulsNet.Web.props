@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/PulsNet.Web.props" />
+</Project>
