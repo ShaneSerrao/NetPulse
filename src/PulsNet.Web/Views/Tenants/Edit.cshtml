@@ -1,0 +1,10 @@
+@model PulsNet.Web.Models.Tenant
+<div style="padding:24px">
+<h1>Edit Tenant</h1>
+<form method="post">
+  <input type="hidden" name="Id" value="@Model.Id" />
+  <div><label>Name</label><input name="Name" value="@Model.Name" /></div>
+  <div><label>Description</label><input name="Description" value="@Model.Description" /></div>
+  <button type="submit">Save</button>
+</form>
+</div>

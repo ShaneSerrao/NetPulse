@@ -9,7 +9,14 @@ namespace PulsNet.Web.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
 
         public DbSet<Device> Devices => Set<Device>();
+        public DbSet<Interface> Interfaces => Set<Interface>();
         public DbSet<TrafficSample> TrafficSamples => Set<TrafficSample>();
         public DbSet<AppSettings> AppSettings => Set<AppSettings>();
+        public DbSet<Tenant> Tenants => Set<Tenant>();
+        public DbSet<Mib> Mibs => Set<Mib>();
+        public DbSet<MibOid> MibOids => Set<MibOid>();
+        public DbSet<ThresholdRule> ThresholdRules => Set<ThresholdRule>();
+        public DbSet<NotificationChannel> NotificationChannels => Set<NotificationChannel>();
+        public DbSet<Incident> Incidents => Set<Incident>();
     }
 }

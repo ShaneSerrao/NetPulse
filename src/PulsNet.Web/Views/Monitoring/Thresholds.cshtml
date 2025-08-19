@@ -1,0 +1,23 @@
+@model IEnumerable<PulsNet.Web.Models.ThresholdRule>
+<div style="padding:24px">
+<h1>Thresholds</h1>
+<form method="post" action="/Monitoring/CreateThreshold">
+  <div><label>Metric</label><input name="Metric" /></div>
+  <div><label>GreaterThan</label><input type="number" step="any" name="GreaterThan" /></div>
+  <div><label>Duration (s)</label><input type="number" name="DurationSeconds" value="60" /></div>
+  <button type="submit">Add</button>
+</form>
+<table style="width:100%;border-collapse:collapse;margin-top:12px">
+<thead><tr><th>Metric</th><th>>Value</th><th>Duration</th><th>Actions</th></tr></thead>
+<tbody>
+@foreach (var r in Model){
+<tr>
+  <td>@r.Metric</td><td>@r.GreaterThan</td><td>@r.DurationSeconds s</td>
+  <td>
+    <form method="post" action="/Monitoring/DeleteThreshold/@r.Id" onsubmit="return confirm('Delete threshold?');"><button type="submit">Delete</button></form>
+  </td>
+</tr>
+}
+</tbody>
+</table>
+</div>

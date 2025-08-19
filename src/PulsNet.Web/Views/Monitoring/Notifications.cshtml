@@ -1,0 +1,22 @@
+@model IEnumerable<PulsNet.Web.Models.NotificationChannel>
+<div style="padding:24px">
+<h1>Notification Channels</h1>
+<form method="post" action="/Monitoring/CreateNotification">
+  <div><label>Type</label><input name="Type" placeholder="email/telegram/slack/sms/webhook" /></div>
+  <div><label>Target</label><input name="Target" placeholder="address/url/phone" /></div>
+  <button type="submit">Add</button>
+</form>
+<table style="width:100%;border-collapse:collapse;margin-top:12px">
+<thead><tr><th>Type</th><th>Target</th><th>Enabled</th><th>Actions</th></tr></thead>
+<tbody>
+@foreach (var c in Model){
+<tr>
+  <td>@c.Type</td><td>@c.Target</td><td>@c.Enabled</td>
+  <td>
+    <form method="post" action="/Monitoring/DeleteNotification/@c.Id" onsubmit="return confirm('Delete channel?');"><button type="submit">Delete</button></form>
+  </td>
+</tr>
+}
+</tbody>
+</table>
+</div>
