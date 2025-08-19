@@ -22,11 +22,19 @@ namespace PulsNet.Web.Data
                 }
             }
 
+            var settings = await db.AppSettings.FirstOrDefaultAsync();
+            if (settings == null)
+            {
+                settings = new AppSettings { GlobalTwoFactorEnabled = false, GlobalPollIntervalSeconds = 5, Theme = "dark" };
+                db.AppSettings.Add(settings);
+                await db.SaveChangesAsync();
+            }
+
             var adminEmail = "admin@pulsnet.local";
             var admin = await userManager.FindByEmailAsync(adminEmail);
             if (admin == null)
             {
-                admin = new ApplicationUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true };
+                admin = new ApplicationUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true, TwoFactorEnabled = false, TwoFactorPreference = false };
                 await userManager.CreateAsync(admin, "PulsNet#2025");
                 await userManager.AddToRoleAsync(admin, "Admin");
             }

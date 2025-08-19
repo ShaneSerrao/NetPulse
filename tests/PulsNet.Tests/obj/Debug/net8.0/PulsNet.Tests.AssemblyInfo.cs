@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PulsNet.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+34c0853c84477cb40d4384a2bb84cfeb82fd39f2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e531adef8a037f9d45599d4bd3f1ba76f5daee3a")]
 [assembly: System.Reflection.AssemblyProductAttribute("PulsNet.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PulsNet.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

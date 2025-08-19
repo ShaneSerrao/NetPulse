@@ -32,7 +32,6 @@ namespace PulsNet.Web.Controllers
             {
                 return Json(value);
             }
-
             var sample = await _db.TrafficSamples.AsNoTracking().Where(t => t.DeviceId == id)
                 .OrderByDescending(t => t.Timestamp).FirstOrDefaultAsync();
             if (sample == null) return NotFound();

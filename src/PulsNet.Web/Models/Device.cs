@@ -22,14 +22,9 @@ namespace PulsNet.Web.Models
         public string SnmpCommunity { get; set; } = string.Empty;
 
         public int SnmpPort { get; set; } = 161;
-
-        public bool IsOnline { get; set; }
+        public int MaxLinkMbps { get; set; } = 1000;
 
         public int? PollIntervalSecondsOverride { get; set; }
         public DateTimeOffset? PollIntervalOverrideSetAt { get; set; }
-
-        public long MonthlyBytesTransferred { get; set; }
-
-        public int MaxLinkMbps { get; set; } = 1000;
     }
 }

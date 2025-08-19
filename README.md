@@ -1,19 +1,20 @@
 # PulsNet – Enterprise Network Monitoring & Device Manager
 
-Modern, responsive ASP.NET Core app for monitoring SNMP-enabled devices (MikroTik focused), with live traffic, latency, device status, role-based access, and admin management.
+A modern ASP.NET Core 8 web app to monitor SNMP-enabled devices (MikroTik-focused). 2FA is disabled by default. Enable/disable via Admin > Settings.
 
-- Backend: ASP.NET Core 8, EF Core, PostgreSQL, Identity
-- Frontend: HTML5, CSS3, Vanilla JS (no extra packages)
+- Solution: `/workspace/PulsNet.sln`
+- Web app: `/workspace/src/PulsNet.Web`
+- Comprehensive guide: `docs/COMPREHENSIVE_README.md`
 
-## Documentation
-- Deployment: `docs/DEPLOYMENT.md`
-- Code Editing: `docs/CODE_EDITING.md`
-- Style Editing: `docs/STYLE_EDITING.md`
-
-## Quick Start (dev)
+Quick start (dev):
 ```
+cd /workspace
 dotnet build
 cd src/PulsNet.Web
+dotnet tool install --global dotnet-ef || true
+export PATH="$HOME/.dotnet/tools:$PATH"
+dotnet ef migrations add InitialCreate
+dotnet ef database update
 ASPNETCORE_ENVIRONMENT=Development dotnet run
 ```
-Visit http://localhost:5000 and log in after seeding.
+Login: `admin@pulsnet.local` / `PulsNet#2025`

@@ -6,8 +6,8 @@ namespace PulsNet.Web.config
     {
         public DatabaseSecrets Db { get; set; } = new DatabaseSecrets();
         public string HelpdeskEmail { get; set; } = "helpdesk@example.com";
-        public bool GlobalTwoFactorEnabled { get; set; } = false;
         public int GlobalPollIntervalSeconds { get; set; } = 5;
+        public bool GlobalTwoFactorEnabled { get; set; } = false;
     }
 
     public class DatabaseSecrets
@@ -24,16 +24,9 @@ namespace PulsNet.Web.config
         public static Secrets Load(string? path = null)
         {
             var secretsPath = path ?? Environment.GetEnvironmentVariable("PULSNET_SECRETS_PATH") ?? "/etc/pulsnet/pulsnet.secrets.json";
-            if (!File.Exists(secretsPath))
-            {
-                return new Secrets();
-            }
+            if (!File.Exists(secretsPath)) return new Secrets();
             var json = File.ReadAllText(secretsPath);
-            var secrets = JsonSerializer.Deserialize<Secrets>(json, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
-            return secrets ?? new Secrets();
+            return JsonSerializer.Deserialize<Secrets>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive=true}) ?? new Secrets();
         }
 
         public static string BuildPostgresConnectionString(Secrets secrets)

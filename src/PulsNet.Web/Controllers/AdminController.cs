@@ -17,6 +17,25 @@ namespace PulsNet.Web.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Settings()
+        {
+            var s = await _db.AppSettings.FirstOrDefaultAsync() ?? new AppSettings();
+            if (s.Id == 0) { _db.AppSettings.Add(s); await _db.SaveChangesAsync(); }
+            return View(s);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Settings(AppSettings settings)
+        {
+            if (!ModelState.IsValid) return View(settings);
+            if (settings.Id == 0) _db.AppSettings.Add(settings); else _db.AppSettings.Update(settings);
+            await _db.SaveChangesAsync();
+            TempData["Saved"] = true;
+            return RedirectToAction(nameof(Settings));
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Devices()
         {
             var devices = await _db.Devices.AsNoTracking().OrderBy(d => d.ClientName).ToListAsync();

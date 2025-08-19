@@ -26,7 +26,6 @@ namespace PulsNet.Web.Services.Snmp
                 using var proc = Process.Start(startInfo);
                 if (proc == null) return null;
                 var output = await proc.StandardOutput.ReadToEndAsync();
-                var error = await proc.StandardError.ReadToEndAsync();
                 await proc.WaitForExitAsync();
                 if (proc.ExitCode != 0) return null;
                 return output;

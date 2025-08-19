@@ -20,6 +20,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
+    options.Tokens.AuthenticatorTokenProvider = null; // effectively no 2FA requirement
 })
 .AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<AppDbContext>();
@@ -38,9 +39,6 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<SnmpClient>();
 builder.Services.AddHostedService<MonitoringService>();
-
-// make global poll interval available via IConfiguration
-builder.Configuration["GlobalPollIntervalSeconds"] = secrets.GlobalPollIntervalSeconds.ToString();
 
 var app = builder.Build();
 
