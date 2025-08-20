@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PulsNet.Web.Models
 {
@@ -26,5 +27,15 @@ namespace PulsNet.Web.Models
 
         public int? PollIntervalSecondsOverride { get; set; }
         public DateTimeOffset? PollIntervalOverrideSetAt { get; set; }
+
+        [ForeignKey("Tenant")] public int? TenantId { get; set; }
+        public Tenant? Tenant { get; set; }
+
+        [MaxLength(32)] public string? LineSpeedLabel { get; set; } // e.g., "100/50 Mbps"
+
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
+
+        [MaxLength(16)] public string CardSize { get; set; } = "md"; // sm/md/lg
     }
 }

@@ -17,39 +17,29 @@ namespace PulsNet.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Settings()
-        {
-            var s = await _db.AppSettings.FirstOrDefaultAsync() ?? new AppSettings();
-            if (s.Id == 0) { _db.AppSettings.Add(s); await _db.SaveChangesAsync(); }
-            return View(s);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Settings(AppSettings settings)
-        {
-            if (!ModelState.IsValid) return View(settings);
-            if (settings.Id == 0) _db.AppSettings.Add(settings); else _db.AppSettings.Update(settings);
-            await _db.SaveChangesAsync();
-            TempData["Saved"] = true;
-            return RedirectToAction(nameof(Settings));
-        }
-
-        [HttpGet]
         public async Task<IActionResult> Devices()
         {
-            var devices = await _db.Devices.AsNoTracking().OrderBy(d => d.ClientName).ToListAsync();
+            var devices = await _db.Devices.Include(d=>d.Tenant).AsNoTracking().OrderBy(d => d.ClientName).ToListAsync();
+            ViewBag.Tenants = await _db.Tenants.AsNoTracking().OrderBy(t=>t.Name).ToListAsync();
             return View(devices);
         }
 
         [HttpGet]
-        public IActionResult CreateDevice() => View(new Device());
+        public async Task<IActionResult> CreateDevice()
+        {
+            ViewBag.Tenants = await _db.Tenants.AsNoTracking().OrderBy(t=>t.Name).ToListAsync();
+            return View(new Device());
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateDevice(Device device)
         {
-            if (!ModelState.IsValid) return View(device);
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Tenants = await _db.Tenants.AsNoTracking().OrderBy(t=>t.Name).ToListAsync();
+                return View(device);
+            }
             _db.Devices.Add(device);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Devices));
@@ -60,6 +50,7 @@ namespace PulsNet.Web.Controllers
         {
             var dev = await _db.Devices.FindAsync(id);
             if (dev == null) return NotFound();
+            ViewBag.Tenants = await _db.Tenants.AsNoTracking().OrderBy(t=>t.Name).ToListAsync();
             return View(dev);
         }
 
@@ -67,7 +58,11 @@ namespace PulsNet.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditDevice(Device device)
         {
-            if (!ModelState.IsValid) return View(device);
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Tenants = await _db.Tenants.AsNoTracking().OrderBy(t=>t.Name).ToListAsync();
+                return View(device);
+            }
             _db.Update(device);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Devices));
@@ -84,6 +79,25 @@ namespace PulsNet.Web.Controllers
                 await _db.SaveChangesAsync();
             }
             return RedirectToAction(nameof(Devices));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Settings()
+        {
+            var s = await _db.AppSettings.FirstOrDefaultAsync() ?? new AppSettings();
+            if (s.Id == 0) { _db.AppSettings.Add(s); await _db.SaveChangesAsync(); }
+            return View(s);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Settings(AppSettings settings)
+        {
+            if (!ModelState.IsValid) return View(settings);
+            if (settings.Id == 0) _db.AppSettings.Add(settings); else _db.AppSettings.Update(settings);
+            await _db.SaveChangesAsync();
+            TempData["Saved"] = true;
+            return RedirectToAction(nameof(Settings));
         }
     }
 }

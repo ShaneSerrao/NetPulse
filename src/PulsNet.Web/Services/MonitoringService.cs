@@ -12,6 +12,8 @@ namespace PulsNet.Web.Services
         private readonly IServiceProvider _serviceProvider;
         private readonly IMemoryCache _cache;
         private readonly ILogger<MonitoringService> _logger;
+        private const string InOidBase = "IF-MIB::ifHCInOctets";
+        private const string OutOidBase = "IF-MIB::ifHCOutOctets";
 
         public MonitoringService(IServiceProvider serviceProvider, IMemoryCache cache, ILogger<MonitoringService> logger)
         {
@@ -36,7 +38,7 @@ namespace PulsNet.Web.Services
                     var tasks = devices.Select(d => PollDeviceAsync(db, snmp, d, stoppingToken));
                     await Task.WhenAll(tasks);
 
-                    var delay = TimeSpan.FromSeconds(Math.Max(1, settings.GlobalPollIntervalSeconds));
+                    var delay = TimeSpan.FromSeconds(Math.Max(2, settings.GlobalPollIntervalSeconds));
                     await Task.Delay(delay, stoppingToken);
                 }
                 catch (Exception ex)
@@ -52,12 +54,45 @@ namespace PulsNet.Web.Services
             try
             {
                 var latencyMs = await MeasureLatencyAsync(device.IpAddress, ct);
+
+                var inMap = await snmp.BulkWalkCounter64Async(device.IpAddress, device.SnmpCommunity, InOidBase, device.SnmpPort);
+                var outMap = await snmp.BulkWalkCounter64Async(device.IpAddress, device.SnmpCommunity, OutOidBase, device.SnmpPort);
+
+                // aggregate Mbps across all interfaces
+                var now = DateTime.UtcNow;
+                var prev = _cache.Get<(Dictionary<string,long> inMap, Dictionary<string,long> outMap, DateTime t)>("counters:"+device.Id);
+                double totalInMbps = 0, totalOutMbps = 0;
+                if (prev.inMap != null && prev.outMap != null && prev.t != default)
+                {
+                    var seconds = (now - prev.t).TotalSeconds;
+                    if (seconds > 0)
+                    {
+                        foreach (var kv in inMap)
+                        {
+                            if (prev.inMap.TryGetValue(kv.Key, out var prevIn))
+                            {
+                                var inDelta = kv.Value - prevIn; if (inDelta < 0) inDelta = 0;
+                                totalInMbps += (inDelta / seconds) * 8.0 / 1_000_000.0;
+                            }
+                        }
+                        foreach (var kv in outMap)
+                        {
+                            if (prev.outMap.TryGetValue(kv.Key, out var prevOut))
+                            {
+                                var outDelta = kv.Value - prevOut; if (outDelta < 0) outDelta = 0;
+                                totalOutMbps += (outDelta / seconds) * 8.0 / 1_000_000.0;
+                            }
+                        }
+                    }
+                }
+                _cache.Set("counters:"+device.Id, (inMap, outMap, now), TimeSpan.FromMinutes(10));
+
                 var sample = new TrafficSample
                 {
                     DeviceId = device.Id,
                     Timestamp = DateTimeOffset.UtcNow,
-                    DownloadMbps = 0,
-                    UploadMbps = 0,
+                    DownloadMbps = totalInMbps,
+                    UploadMbps = totalOutMbps,
                     LatencyMs = latencyMs,
                     IsOnline = latencyMs >= 0
                 };

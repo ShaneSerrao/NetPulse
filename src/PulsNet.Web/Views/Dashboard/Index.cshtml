@@ -1,33 +1,42 @@
 @model IEnumerable<PulsNet.Web.Models.Device>
 @{
     ViewData["Title"] = "Dashboard";
+    var groups = Model.GroupBy(d => d.Tenant?.Name ?? "Unassigned").OrderBy(g=>g.Key);
 }
 <div class="dashboard">
     <h1>PulsNet Dashboard</h1>
-    <div class="devices-grid">
-        @foreach (var d in Model)
-        {
-            <div class="device-card" data-device-id="@d.Id" data-max-mbps="@d.MaxLinkMbps">
-                <div class="device-header">
-                    <div class="client-name">@d.ClientName</div>
-                    <div class="circuit">#@d.CircuitNumber</div>
-                </div>
-                <div class="ip-row">
-                    <span class="ip" data-ip="@d.IpAddress">•••.•••.•••.•••</span>
-                    <button class="reveal">Reveal</button>
-                </div>
-                <div class="metrics">
-                    <div class="metric"><span class="label">Down</span> <span class="down">0.0</span> Mbps</div>
-                    <div class="metric"><span class="label">Up</span> <span class="up">0.0</span> Mbps</div>
-                    <div class="metric"><span class="label">Latency</span> <span class="latency">—</span> ms</div>
-                </div>
-                <div class="link-usage">
-                    <div class="bar"><div class="fill" style="width:0%"></div></div>
-                </div>
-                <div class="status"><span class="dot offline"></span><span class="text">Offline</span></div>
+    @foreach (var g in groups)
+    {
+        <details open>
+            <summary style="cursor:pointer;font-weight:700;margin:12px 0">@g.Key (@g.Count())</summary>
+            <div class="devices-grid">
+                @foreach (var d in g)
+                {
+                    var sizeClass = d.CardSize == "lg" ? "card-lg" : d.CardSize == "sm" ? "card-sm" : "";
+                    <div class="device-card @sizeClass" data-device-id="@d.Id" data-max-mbps="@d.MaxLinkMbps">
+                        <div class="device-header">
+                            <div class="client-name">@d.ClientName</div>
+                            <div class="circuit">#@d.CircuitNumber</div>
+                        </div>
+                        <div class="ip-row">
+                            <span class="ip" data-ip="@d.IpAddress">•••.•••.•••.•••</span>
+                            <button class="reveal">Reveal</button>
+                        </div>
+                        <div class="metrics">
+                            <div class="metric"><span class="label">Down</span> <span class="down">0.0</span> Mbps</div>
+                            <div class="metric"><span class="label">Up</span> <span class="up">0.0</span> Mbps</div>
+                            <div class="metric"><span class="label">Latency</span> <span class="latency">—</span> ms</div>
+                        </div>
+                        <div class="metric"><span class="label">Line</span> <span>@(d.LineSpeedLabel ?? ($"{d.MaxLinkMbps} Mbps"))</span></div>
+                        <div class="link-usage">
+                            <div class="bar"><div class="fill" style="width:0%"></div></div>
+                        </div>
+                        <div class="status"><span class="dot offline"></span><span class="text">Offline</span></div>
+                    </div>
+                }
             </div>
-        }
-    </div>
+        </details>
+    }
 </div>
 @section Scripts{
     <script src="/js/dashboard.js"></script>

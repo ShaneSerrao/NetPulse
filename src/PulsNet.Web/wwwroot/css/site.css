@@ -25,6 +25,8 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto S
 .devices-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
 .device-card{background:#161b2e;border-radius:16px;padding:16px;box-shadow:0 10px 25px rgba(0,0,0,.3);transition:transform .2s ease, box-shadow .2s ease}
 .device-card:hover{transform:translateY(-3px);box-shadow:0 16px 35px rgba(0,0,0,.45)}
+.device-card.card-sm{transform:scale(.95)}
+.device-card.card-lg{transform:scale(1.05)}
 .device-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .client-name{font-weight:700;font-size:1.1rem}
 .circuit{opacity:.8}
@@ -33,7 +35,7 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto S
 .ip.revealed{filter:blur(0)}
 .reveal{background:#253054;color:#c6d2ff;border:1px solid #2c3a66;border-radius:8px;padding:6px 10px;cursor:pointer}
 .reveal:hover{background:#2a3867}
-.metrics{display:flex;gap:12px;margin:10px 0}
+.metrics{display:flex;gap:12px;margin:10px 0;flex-wrap:wrap}
 .metric .label{opacity:.7;margin-right:6px}
 .link-usage .bar{width:100%;height:10px;background:#0c1020;border-radius:999px;overflow:hidden}
 .link-usage .fill{height:100%;width:0;background:#1bcf7a;transition:width .5s ease, background .5s ease}
