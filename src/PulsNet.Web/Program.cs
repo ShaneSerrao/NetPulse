@@ -5,6 +5,7 @@ using PulsNet.Web.Data;
 using PulsNet.Web.Models;
 using PulsNet.Web.Services;
 using PulsNet.Web.Services.Snmp;
+using PulsNet.Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,8 @@ builder.Services.AddHostedService<MonitoringService>();
 builder.Services.AddSingleton<ServerMetricsService>();
 builder.Services.AddHostedService<ServerMetricsService>(sp => sp.GetRequiredService<ServerMetricsService>());
 
+builder.Services.AddSession(options=>{ options.IdleTimeout = TimeSpan.FromHours(8); options.Cookie.HttpOnly = true; options.Cookie.IsEssential = true;});
+
 var app = builder.Build();
 
 await SeedData.InitializeAsync(app.Services);
@@ -57,6 +60,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
+app.UseIdleTimeout();
 
 app.UseAuthentication();
 app.UseAuthorization();

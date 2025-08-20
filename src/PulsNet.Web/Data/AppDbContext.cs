@@ -15,8 +15,10 @@ namespace PulsNet.Web.Data
         public DbSet<Tenant> Tenants => Set<Tenant>();
         public DbSet<Mib> Mibs => Set<Mib>();
         public DbSet<MibOid> MibOids => Set<MibOid>();
+        public DbSet<DeviceMib> DeviceMibs => Set<DeviceMib>();
         public DbSet<ThresholdRule> ThresholdRules => Set<ThresholdRule>();
         public DbSet<NotificationChannel> NotificationChannels => Set<NotificationChannel>();
         public DbSet<Incident> Incidents => Set<Incident>();
+        public DbSet<DeviceUser> DeviceUsers => Set<DeviceUser>();
     }
 }
