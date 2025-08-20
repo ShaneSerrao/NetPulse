@@ -1,0 +1,39 @@
+@model PulsNet.Web.Models.Mib
+<div style="padding:24px">
+<h1>Edit MIB</h1>
+<form method="post">
+  @Html.AntiForgeryToken()
+  <input type="hidden" name="Id" value="@Model.Id" />
+  <div><label>Name</label><input name="Name" value="@Model.Name" /></div>
+  <div><label>Description</label><input name="Description" value="@Model.Description" /></div>
+  <button type="submit">Save</button>
+</form>
+<hr />
+<h2>OIDs</h2>
+<form method="post" action="/Mibs/AddOid">
+  @Html.AntiForgeryToken()
+  <input type="hidden" name="mibId" value="@Model.Id" />
+  <div><label>OID</label><input name="oid" /></div>
+  <div><label>Label</label><input name="label" /></div>
+  <div><label>Unit</label><input name="unit" /></div>
+  <div><label>Notes</label><input name="notes" /></div>
+  <button type="submit">Add OID</button>
+</form>
+<table style="width:100%;border-collapse:collapse;margin-top:12px">
+<thead><tr><th>OID</th><th>Label</th><th>Unit</th><th>Notes</th><th>Actions</th></tr></thead>
+<tbody>
+@foreach (var o in Model.Oids){
+<tr>
+  <td>@o.Oid</td><td>@o.Label</td><td>@o.Unit</td><td>@o.Notes</td>
+  <td>
+    <form method="post" action="/Mibs/DeleteOid/@o.Id">
+      @Html.AntiForgeryToken()
+      <input type="hidden" name="mibId" value="@Model.Id" />
+      <button type="submit">Delete</button>
+    </form>
+  </td>
+</tr>
+}
+</tbody>
+</table>
+</div>

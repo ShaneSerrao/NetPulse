@@ -1,0 +1,42 @@
+@model PulsNet.Web.Models.Device
+@{
+    ViewData["Title"] = "Create Device";
+    var tenants = (IEnumerable<PulsNet.Web.Models.Tenant>)ViewBag.Tenants;
+}
+<div style="padding:24px;max-width:720px;margin:auto">
+    <h1>Create Device</h1>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <div><label>Client Name</label><input name="ClientName" value="@Model.ClientName" style="width:100%" /></div>
+        <div><label>Circuit Number</label><input name="CircuitNumber" value="@Model.CircuitNumber" style="width:100%" /></div>
+        <div><label>Tenant</label>
+            <select name="TenantId" style="width:100%">
+                <option value="">-- None --</option>
+                @foreach (var t in tenants){<option value="@t.Id">@t.Name</option>}
+            </select>
+        </div>
+        <div><label>IP Address</label><input name="IpAddress" value="@Model.IpAddress" style="width:100%" /></div>
+        <div style="display:flex;gap:8px">
+            <div style="flex:1"><label>SNMP Community</label><input name="SnmpCommunity" value="@Model.SnmpCommunity" style="width:100%" /></div>
+            <div style="width:120px"><label>SNMP Port</label><input name="SnmpPort" value="@Model.SnmpPort" type="number" style="width:100%" /></div>
+        </div>
+        <div style="display:flex;gap:8px">
+            <div style="flex:1"><label>Max Link (Mbps)</label><input name="MaxLinkMbps" value="@Model.MaxLinkMbps" type="number" style="width:100%" /></div>
+            <div style="flex:1"><label>Line Speed Label</label><input name="LineSpeedLabel" value="@Model.LineSpeedLabel" style="width:100%" placeholder="e.g., 100/50 Mbps" /></div>
+        </div>
+        <div style="display:flex;gap:8px">
+            <div style="flex:1"><label>Latitude</label><input name="Latitude" value="@Model.Latitude" type="number" step="any" style="width:100%" /></div>
+            <div style="flex:1"><label>Longitude</label><input name="Longitude" value="@Model.Longitude" type="number" step="any" style="width:100%" /></div>
+            <div style="width:150px"><label>Card Size</label>
+                <select name="CardSize" style="width:100%">
+                    <option value="sm">Small</option>
+                    <option value="md" selected>Medium</option>
+                    <option value="lg">Large</option>
+                </select>
+            </div>
+        </div>
+        <div style="margin-top:12px">
+            <button type="submit">Create</button>
+        </div>
+    </form>
+</div>

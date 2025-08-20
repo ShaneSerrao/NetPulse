@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PulsNet.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c20e5968065c154311e56a32592a53bdfa78aad0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f4880225f1272b66b6ce2cb25b23753a85d6b429")]
 [assembly: System.Reflection.AssemblyProductAttribute("PulsNet.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PulsNet.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

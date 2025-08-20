@@ -1,0 +1,32 @@
+@model PulsNet.Web.Models.AppSettings
+@{
+    ViewData["Title"] = "Settings";
+}
+<div style="padding:24px">
+    <h1>Settings</h1>
+    @if (TempData["Saved"] != null) {<p style="color:#2bbf7b">Saved.</p>}
+    <form method="post">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <div>
+            <label>Global Two-Factor Enabled</label>
+            <input type="checkbox" name="GlobalTwoFactorEnabled" value="true" @(Model.GlobalTwoFactorEnabled?"checked":"") />
+        </div>
+        <div>
+            <label>Global Poll Interval (seconds)</label>
+            <input name="GlobalPollIntervalSeconds" type="number" min="1" value="@Model.GlobalPollIntervalSeconds" />
+        </div>
+        <div>
+            <label>Theme</label>
+            <input name="Theme" value="@Model.Theme" />
+        </div>
+        <div>
+            <label>Primary Color</label>
+            <input name="PrimaryColor" value="@Model.PrimaryColor" />
+        </div>
+        <div>
+            <label>Accent Color</label>
+            <input name="AccentColor" value="@Model.AccentColor" />
+        </div>
+        <button type="submit">Save</button>
+    </form>
+</div>

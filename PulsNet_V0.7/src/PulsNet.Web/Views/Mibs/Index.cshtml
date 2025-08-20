@@ -1,0 +1,24 @@
+@model IEnumerable<PulsNet.Web.Models.Mib>
+<div style="padding:24px">
+<h1>MIBs</h1>
+<p><a href="/Mibs/Create" style="color:#aeb9ff">+ Add MIB</a></p>
+<table style="width:100%;border-collapse:collapse">
+<thead><tr><th>Name</th><th>Description</th><th>OIDs</th><th>Actions</th></tr></thead>
+<tbody>
+@foreach (var m in Model){
+<tr>
+  <td>@m.Name</td>
+  <td>@m.Description</td>
+  <td>@(m.Oids?.Count ?? 0)</td>
+  <td>
+     <a href="/Mibs/Edit/@m.Id" style="color:#c6d2ff">Edit</a>
+     <form method="post" action="/Mibs/Delete/@m.Id" style="display:inline" onsubmit="return confirm('Delete MIB?');">
+       @Html.AntiForgeryToken()
+       <button type="submit">Delete</button>
+     </form>
+  </td>
+</tr>
+}
+</tbody>
+</table>
+</div>
