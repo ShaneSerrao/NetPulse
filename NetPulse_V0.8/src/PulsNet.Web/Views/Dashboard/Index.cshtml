@@ -1,0 +1,76 @@
+@model IEnumerable<PulsNet.Web.Models.Device>
+@using Microsoft.AspNetCore.Authorization
+@{
+    ViewData["Title"] = "Dashboard";
+    var groups = Model.GroupBy(d => d.Tenant?.Name ?? "Unassigned").OrderBy(g=>g.Key);
+}
+<div class="dashboard">
+    <h1>PulsNet Dashboard</h1>
+    <div id="server-metrics" class="device-card" style="margin-bottom:16px;display:none">
+        <div class="device-header"><div class="client-name">Server Metrics</div></div>
+        <div class="metrics" style="flex-wrap:wrap">
+            <div class="metric"><span class="label">CPU</span> <span id="cpu-util">—</span>% (<span id="cpu-model">—</span>, <span id="cpu-cores">—</span> cores, <span id="cpu-mhz">—</span> MHz, <span id="cpu-temp">—</span>°C)</div>
+            <div class="metric"><span class="label">RAM</span> <span id="ram-used">—</span> / <span id="ram-total">—</span> MB (<span id="ram-pct">—</span>%) <span id="ram-temp"></span></div>
+            <div class="metric"><span class="label">NET</span> RX <span id="net-rx">—</span> Mbps / TX <span id="net-tx">—</span> Mbps</div>
+            <div class="metric"><span class="label">Motherboard</span> <span id="mb-temp">—</span>°C</div>
+        </div>
+    </div>
+    @foreach (var g in groups)
+    {
+        <details open>
+            <summary style="cursor:pointer;font-weight:700;margin:12px 0">@g.Key (@g.Count())</summary>
+            <div class="devices-grid">
+                @foreach (var d in g)
+                {
+                    var sizeClass = d.CardSize == "lg" ? "card-lg" : d.CardSize == "sm" ? "card-sm" : "";
+                    <div class="device-card @sizeClass" data-device-id="@d.Id" data-max-mbps="@d.MaxLinkMbps">
+                        <div class="device-header">
+                            <div class="client-name">@d.ClientName</div>
+                            <div class="circuit">#@d.CircuitNumber</div>
+                        </div>
+                        <div class="ip-row">
+                            <span class="ip" data-ip="@d.IpAddress">•••.•••.•••.•••</span>
+                            <button class="reveal">Reveal</button>
+                        </div>
+                        <div class="metrics">
+                            <div class="metric"><span class="label">Down</span> <span class="down">0.0</span> Mbps</div>
+                            <div class="metric"><span class="label">Up</span> <span class="up">0.0</span> Mbps</div>
+                            <div class="metric"><span class="label">Latency</span> <span class="latency">—</span> ms</div>
+                        </div>
+                        <div class="metric"><span class="label">Line</span> <span>@(d.LineSpeedLabel ?? ($"{d.MaxLinkMbps} Mbps"))</span></div>
+                        <div class="link-usage">
+                            <div class="bar"><div class="fill" style="width:0%"></div></div>
+                        </div>
+                        <div class="status"><span class="dot offline"></span><span class="text">Offline</span></div>
+                    </div>
+                }
+            </div>
+        </details>
+    }
+</div>
+@section Scripts{
+    <script src="/js/dashboard.js"></script>
+    <script>
+    (async function(){
+        try{
+            const res = await fetch('/Dashboard/ServerMetrics');
+            if(res.ok){
+                document.getElementById('server-metrics').style.display='block';
+                const m = await res.json();
+                document.getElementById('cpu-util').textContent = (m.cpu.utilizationPercent||0).toFixed(1);
+                document.getElementById('cpu-model').textContent = m.cpu.model||'—';
+                document.getElementById('cpu-cores').textContent = m.cpu.cores||'—';
+                document.getElementById('cpu-mhz').textContent = (m.cpu.mHz||0).toFixed(0);
+                document.getElementById('cpu-temp').textContent = m.cpu.temperatureC ?? '—';
+                document.getElementById('ram-total').textContent = (m.memory.totalMB||0).toFixed(0);
+                document.getElementById('ram-used').textContent = (m.memory.usedMB||0).toFixed(0);
+                document.getElementById('ram-pct').textContent = (m.memory.usedPercent||0).toFixed(1);
+                document.getElementById('ram-temp').textContent = m.memory.temperatureC?`(${m.memory.temperatureC}°C)`:'';
+                document.getElementById('net-rx').textContent = (m.network.rxMbps||0).toFixed(2);
+                document.getElementById('net-tx').textContent = (m.network.txMbps||0).toFixed(2);
+                document.getElementById('mb-temp').textContent = m.motherboard.temperatureC ?? '—';
+            }
+        }catch{}
+    })();
+    </script>
+}

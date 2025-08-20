@@ -1,0 +1,11 @@
+@model PulsNet.Web.Models.ApplicationUser
+<div style="padding:24px">
+<h1>Edit User</h1>
+<form method="post">
+  @Html.AntiForgeryToken()
+  <input type="hidden" name="id" value="@Model.Id" />
+  <div><label>Email</label><input name="email" value="@Model.Email" /></div>
+  <div><label>Two-Factor Enabled</label><input type="checkbox" name="twoFactor" value="true" @(Model.TwoFactorEnabled?"checked":"") /></div>
+  <button type="submit">Save</button>
+</form>
+</div>

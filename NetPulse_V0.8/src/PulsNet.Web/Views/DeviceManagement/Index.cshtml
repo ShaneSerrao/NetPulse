@@ -1,0 +1,139 @@
+@{
+    ViewData["Title"] = "Device Management";
+    var devices = (IEnumerable<PulsNet.Web.Models.Device>)ViewBag.Devices;
+    var tenants = (IEnumerable<PulsNet.Web.Models.Tenant>)ViewBag.Tenants;
+    var templates = (IEnumerable<PulsNet.Web.Models.ConfigTemplate>)ViewBag.Templates;
+    var scripts = (IEnumerable<PulsNet.Web.Models.ScriptItem>)ViewBag.Scripts;
+    var firmwares = (IEnumerable<PulsNet.Web.Models.FirmwareCatalog>)ViewBag.Firmwares;
+}
+<div style="padding:24px">
+<h1>Device Management</h1>
+@if (TempData["Msg"]!=null){<div style="background:#1b2a3e;padding:8px;border-radius:8px;margin-bottom:10px">@TempData["Msg"]</div>}
+<div class="device-card" style="padding:16px">
+  <details open>
+    <summary style="font-weight:700;cursor:pointer">Device Selection</summary>
+    <div style="display:flex;gap:12px;align-items:center;margin-top:8px;flex-wrap:wrap">
+      <input id="deviceFilter" placeholder="Search devices..." style="flex:1" oninput="filterDevices()" />
+      <label><input type="checkbox" id="selectAll" onclick="toggleAll(this)"> Select All</label>
+    </div>
+    <div id="deviceList" style="max-height:220px;overflow:auto;margin-top:8px;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:6px">
+      @foreach (var d in devices){
+        <label class="device-tile" style="display:flex;align-items:center;gap:8px;padding:6px;background:#0f1528;border-radius:8px">
+          <input type="checkbox" name="deviceIds" value="@d.Id" />
+          <span>@(d.Tenant?.Name ?? "Unassigned") — @d.ClientName (@d.IpAddress)</span>
+        </label>
+      }
+    </div>
+  </details>
+  <details style="margin-top:12px">
+    <summary style="font-weight:700;cursor:pointer">Templates</summary>
+    <form method="post" action="/DeviceManagement/ApplyTemplate">
+      @Html.AntiForgeryToken()
+      <select name="templateId" style="min-width:240px">
+        @foreach (var t in templates){<option value="@t.Id">@t.Name</option>}
+      </select>
+      <input type="hidden" name="deviceIds" id="devicesForTemplate" />
+      <button type="submit">Apply</button>
+    </form>
+    <form method="post" action="/DeviceManagement/CreateTemplate" style="margin-top:8px">
+      @Html.AntiForgeryToken()
+      <input name="name" placeholder="New template name" />
+      <input name="description" placeholder="Description" />
+      <textarea name="content" placeholder="Template content" style="width:100%;height:120px"></textarea>
+      <select name="tenantId"><option value="">Tenant (optional)</option>@foreach (var t in tenants){<option value="@t.Id">@t.Name</option>}</select>
+      <button type="submit">Create Template</button>
+    </form>
+  </details>
+  <details style="margin-top:12px">
+    <summary style="font-weight:700;cursor:pointer">Scripts</summary>
+    <form method="post" action="/DeviceManagement/RunScript">
+      @Html.AntiForgeryToken()
+      <select name="scriptId" style="min-width:240px">
+        @foreach (var s in scripts){<option value="@s.Id">@s.Name</option>}
+      </select>
+      <input type="hidden" name="deviceIds" id="devicesForScript" />
+      <button type="submit">Run</button>
+    </form>
+    <form method="post" action="/DeviceManagement/CreateScript" style="margin-top:8px">
+      @Html.AntiForgeryToken()
+      <input name="name" placeholder="New script name" />
+      <input name="description" placeholder="Description" />
+      <textarea name="content" placeholder="/system script add ..." style="width:100%;height:120px"></textarea>
+      <button type="submit">Create Script</button>
+    </form>
+  </details>
+  <details style="margin-top:12px">
+    <summary style="font-weight:700;cursor:pointer">Firmware</summary>
+    <form method="post" action="/DeviceManagement/FirmwareUpdate">
+      @Html.AntiForgeryToken()
+      <select name="version" style="min-width:240px">
+        @foreach (var f in firmwares){<option>@f.Version</option>}
+      </select>
+      <input type="hidden" name="deviceIds" id="devicesForFirmware" />
+      <button type="submit">Schedule Update</button>
+    </form>
+    <form method="post" action="/DeviceManagement/CreateFirmware" style="margin-top:8px">
+      @Html.AntiForgeryToken()
+      <input name="version" placeholder="Version e.g., 7.16.1" />
+      <input name="url" placeholder="Download URL (optional)" />
+      <input name="notes" placeholder="Notes (optional)" />
+      <button type="submit">Add Firmware</button>
+    </form>
+  </details>
+  <details style="margin-top:12px">
+    <summary style="font-weight:700;cursor:pointer">Interfaces / VLAN / Queues / VPN</summary>
+    <form method="post" action="/DeviceManagement/UpdateInterface">
+      @Html.AntiForgeryToken()
+      <textarea name="changesJson" placeholder='{"interfaces":[{"name":"ether1","desc":"Uplink"}]}' style="width:100%;height:120px"></textarea>
+      <input type="hidden" name="deviceIds" id="devicesForInterface" />
+      <button type="submit">Schedule Changes</button>
+    </form>
+  </details>
+  <details style="margin-top:12px">
+    <summary style="font-weight:700;cursor:pointer">Rollback</summary>
+    <form method="post" action="/DeviceManagement/Rollback">
+      @Html.AntiForgeryToken()
+      <input name="deviceId" placeholder="Device ID" />
+      <input name="actionId" placeholder="History Action ID" />
+      <button type="submit">Schedule Rollback</button>
+    </form>
+    <div style="margin-top:8px">
+      <input id="histDevId" placeholder="Device ID for history" />
+      <button type="button" onclick="loadHistory()">Load History</button>
+      <pre id="historyOut" style="max-height:160px;overflow:auto;background:#0f1528;padding:8px;border-radius:8px"></pre>
+    </div>
+  </details>
+</div>
+<script>
+function checkedDeviceIds(){
+  return Array.from(document.querySelectorAll('input[name="deviceIds"]:checked')).map(x=>x.value).join(',');
+}
+function applySelection(){
+  const ids = checkedDeviceIds();
+  document.getElementById('devicesForTemplate').value = ids;
+  document.getElementById('devicesForScript').value = ids;
+  document.getElementById('devicesForFirmware').value = ids;
+  document.getElementById('devicesForInterface').value = ids;
+}
+function toggleAll(cb){
+  document.querySelectorAll('input[name="deviceIds"]').forEach(x=>{x.checked = cb.checked});
+  applySelection();
+}
+function filterDevices(){
+  const q = document.getElementById('deviceFilter').value.toLowerCase();
+  document.querySelectorAll('#deviceList .device-tile').forEach(el=>{
+    const txt = el.textContent.toLowerCase();
+    el.style.display = txt.includes(q) ? '' : 'none';
+  });
+}
+['deviceList'].forEach(()=>{});
+setInterval(applySelection, 500);
+async function loadHistory(){
+  const id = document.getElementById('histDevId').value;
+  const r = await fetch(`/DeviceManagement/History?deviceId=${id}`);
+  if(!r.ok) return;
+  const items = await r.json();
+  document.getElementById('historyOut').textContent = JSON.stringify(items, null, 2);
+}
+</script>
+</div>
