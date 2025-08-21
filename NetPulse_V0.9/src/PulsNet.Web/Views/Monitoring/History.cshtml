@@ -1,0 +1,17 @@
+@model IEnumerable<PulsNet.Web.Models.Incident>
+<div style="padding:24px">
+<h1>History & Incidents</h1>
+<table style="width:100%;border-collapse:collapse">
+<thead><tr><th>Timestamp</th><th>Device</th><th>Type</th><th>Message</th></tr></thead>
+<tbody>
+@foreach (var i in Model){
+<tr>
+  <td>@i.Timestamp.UtcDateTime.ToString("u")</td>
+  <td>@i.DeviceId</td>
+  <td>@i.Type</td>
+  <td>@i.Message</td>
+</tr>
+}
+</tbody>
+</table>
+</div>
