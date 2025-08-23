@@ -1,0 +1,7 @@
+{
+  "Database": { "Host": "127.0.0.1", "Port": 5432, "Database": "pulsnet", "Username": "pulsnet", "Password": "changeme" },
+  "Security": { "Global2FAEnabled": false, "HttpsOnly": true },
+  "Polling": { "GlobalIntervalSeconds": 5, "CacheSeconds": 5, "OfflineThresholdSeconds": 60 },
+  "Theme": { "Name": "dark", "Primary": "#2a3867", "Accent": "#aeb9ff", "Background": "#0b1220", "Surface": "#0f172a", "Text": "#e5e7eb" },
+  "Smtp": { "Host": "smtp.example.com", "Port": 587, "Username": "alerts@example.com", "Password": "changeme", "From": "PulsNet Alerts <alerts@example.com>", "UseStartTls": true }
+}

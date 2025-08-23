@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tenants</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/tenants.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">PulsNet</div>
+      <nav>
+        <a href="/">Dashboard</a>
+        <a href="/admin.html">Admin</a>
+        <a href="/tenants.html" class="active">Tenants</a>
+      </nav>
+    </header>
+
+    <main class="grid two">
+      <section class="card">
+        <h2>Create Tenant</h2>
+        <label>Name <input id="name"></label>
+        <button id="create" class="btn">Create</button>
+      </section>
+
+      <section class="card">
+        <h2>Tenants</h2>
+        <div id="list"></div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

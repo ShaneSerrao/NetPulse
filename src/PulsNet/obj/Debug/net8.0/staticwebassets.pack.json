@@ -1,0 +1,93 @@
+{
+  "Files": [
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/admin.html",
+      "PackagePath": "staticwebassets/admin.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/admin.js",
+      "PackagePath": "staticwebassets/admin.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/admin.tmp",
+      "PackagePath": "staticwebassets/admin.tmp"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/app.js",
+      "PackagePath": "staticwebassets/app.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/index.html",
+      "PackagePath": "staticwebassets/index.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/login.html",
+      "PackagePath": "staticwebassets/login.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/login.js",
+      "PackagePath": "staticwebassets/login.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/management.html",
+      "PackagePath": "staticwebassets/management.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/management.js",
+      "PackagePath": "staticwebassets/management.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/mibs.html",
+      "PackagePath": "staticwebassets/mibs.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/mibs.js",
+      "PackagePath": "staticwebassets/mibs.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/sites.html",
+      "PackagePath": "staticwebassets/sites.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/sites.js",
+      "PackagePath": "staticwebassets/sites.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/styles.css",
+      "PackagePath": "staticwebassets/styles.css"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/tenants.html",
+      "PackagePath": "staticwebassets/tenants.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/tenants.js",
+      "PackagePath": "staticwebassets/tenants.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/users.html",
+      "PackagePath": "staticwebassets/users.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/users.js",
+      "PackagePath": "staticwebassets/users.js"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.PulsNet.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.PulsNet.props",
+      "PackagePath": "build\\PulsNet.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.PulsNet.props",
+      "PackagePath": "buildMultiTargeting\\PulsNet.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.PulsNet.props",
+      "PackagePath": "buildTransitive\\PulsNet.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

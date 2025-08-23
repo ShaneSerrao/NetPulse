@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sites</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/sites.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">PulsNet</div>
+      <nav>
+        <a href="/">Dashboard</a>
+        <a href="/admin.html">Admin</a>
+        <a class="active" href="/sites.html">Sites</a>
+      </nav>
+    </header>
+
+    <main class="grid two">
+      <section class="card">
+        <h2>Create / Update Site</h2>
+        <label>Name <input id="name"></label>
+        <label>Address <input id="addr"></label>
+        <label>Latitude <input id="lat" type="number" step="any"></label>
+        <label>Longitude <input id="lon" type="number" step="any"></label>
+        <button id="save" class="btn">Save</button>
+      </section>
+
+      <section class="card">
+        <h2>Sites</h2>
+        <canvas id="map" width="600" height="400" style="max-width:100%"></canvas>
+        <div>Click map to set lat/lon</div>
+        <div id="list"></div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

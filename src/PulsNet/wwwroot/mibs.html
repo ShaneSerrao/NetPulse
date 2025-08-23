@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MIBs</title><link rel="stylesheet" href="/styles.css"><script defer src="/mibs.js"></script></head>
+<body><div class="container"><header class="topbar"><div class="brand">PulsNet</div><nav><a href="/">Dashboard</a><a href="/admin.html">Admin</a><a class="active" href="/mibs.html">MIBs</a></nav></header>
+<main class="grid two">
+<section class="card"><h2>SNMP Walk</h2>
+<label>IP <input id="ip"></label>
+<label>Community <input id="comm" value="public"></label>
+<label>Base OID <input id="oid" value="1.3.6.1.2.1"></label>
+<button id="walk" class="btn">Walk</button>
+<pre id="out" style="max-height:300px;overflow:auto"></pre>
+</section>
+<section class="card"><h2>Catalog</h2>
+<div class="row"><label>OID <input id="coid"></label><label>Name <input id="cname"></label></div>
+<button id="add" class="btn">Add</button>
+<div id="catalog"></div>
+</section>
+</main></div></body></html>

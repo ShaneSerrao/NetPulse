@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Management</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/management.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">PulsNet</div>
+      <nav>
+        <a href="/">Dashboard</a>
+        <a href="/admin.html">Admin</a>
+        <a class="active" href="/management.html">Management</a>
+      </nav>
+    </header>
+
+    <main class="card">
+      <h2>Bulk Actions</h2>
+      <label>Device IDs (comma) <input id="devs"></label>
+      <label>Template ID <input id="tpl" type="number"></label>
+      <button id="applyTpl" class="btn">Apply Template</button>
+      <label>Script ID <input id="scr" type="number"></label>
+      <button id="runScr" class="btn">Run Script</button>
+      <label>Firmware Version <input id="fw"></label>
+      <button id="fwBtn" class="btn">Firmware Update</button>
+      <div id="out"></div>
+    </main>
+  </div>
+</body>
+</html>

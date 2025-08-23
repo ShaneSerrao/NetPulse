@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PulsNet Admin</title>
+<link rel="stylesheet" href="/styles.css">
+<script defer src="/admin.js"></script>
+</head>
+<body>
+<div class="container">
+  <header class="topbar">
+    <div class="brand">PulsNet</div>
+    <nav>
+      <a href="/">Dashboard</a>
+      <a href="/admin.html" class="active">Admin</a>
+      <a href="/mibs.html">MIBs</a>
+      <a href="/sites.html">Sites</a>
+    </nav>
+  </header>
+  <main class="grid two">
+    <section class="card">
+      <h2>Theme</h2>
+      <div class="grid two">
+        <label>Mode<select id="mode"><option value="dark">dark</option><option value="light">light</option></select></label>
+        <label>Primary<input type="color" id="primary" value="#2a3867"></label>
+        <label>Accent<input type="color" id="accent" value="#aeb9ff"></label>
+      </div>
+      <button id="saveTheme" class="btn">Save</button>
+    </section>
+
+    <section class="card">
+      <h2>Polling</h2>
+      <label>Global Poll Interval (s)<input id="interval" type="number" min="3" value="5"></label>
+      <label>Cache (s)<input id="cache" type="number" min="1" value="5"></label>
+      <label>Offline Threshold (s)<input id="offline" type="number" min="10" value="60"></label>
+      <button id="savePolling" class="btn">Save</button>
+    </section>
+
+    <section class="card">
+      <h2>Security</h2>
+      <label><input type="checkbox" id="g2fa"> Global Two-Factor Enabled</label>
+      <button id="save2fa" class="btn">Save</button>
+    </section>
+
+    <section class="card">
+      <h2>Device Caps & Interface</h2>
+      <label>Device ID <input id="did" type="number"></label>
+      <label>Interface Index <input id="ifx" type="number" min="1"></label>
+      <div class="row"><label><input type="checkbox" id="cden"> Cap Down</label><input id="cd" type="number" placeholder="Mbps"></div>
+      <div class="row"><label><input type="checkbox" id="cuen"> Cap Up</label><input id="cu" type="number" placeholder="Mbps"></div>
+      <button id="applyCaps" class="btn">Apply</button>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>
