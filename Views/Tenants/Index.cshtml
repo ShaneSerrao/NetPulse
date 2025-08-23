@@ -1,0 +1,20 @@
+@model IEnumerable<PulsNet.Web.Models.Tenant>
+<div style="padding:24px">
+<h1>Tenants</h1>
+<p><a href="/Tenants/Create" style="color:#aeb9ff">+ Add Tenant</a></p>
+<table style="width:100%;border-collapse:collapse">
+<thead><tr><th>Name</th><th>Description</th><th>Actions</th></tr></thead>
+<tbody>
+@foreach (var t in Model){
+<tr><td>@t.Name</td><td>@t.Description</td>
+<td>
+  <a href="/Tenants/Edit/@t.Id" style="color:#c6d2ff">Edit</a>
+  <form method="post" action="/Tenants/Delete/@t.Id" style="display:inline" onsubmit="return confirm('Delete tenant?');">
+    @Html.AntiForgeryToken()
+    <button type="submit">Delete</button>
+  </form>
+</td></tr>
+}
+</tbody>
+</table>
+</div>

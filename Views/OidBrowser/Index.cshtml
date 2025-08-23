@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "OID Browser";
+}
+
+<div style="padding:24px">
+    <!-- Access device properties from ViewBag -->
+    <h1>OID Browser — @ViewBag.Device.ClientName (@ViewBag.Device.IpAddress)</h1>
+
+    @if (TempData["Msg"] != null)
+    {
+        <div style="background:#1b2a3e;padding:8px;border-radius:8px;margin-bottom:10px">@TempData["Msg"]</div>
+    }
+
+    <div id="loadingMessage" style="display:none;">Loading...</div>
+    <input type="text" id="baseOid" placeholder="Enter Base OID" value="1.3.6.1.2.1" />
+    <button id="walkButton">Walk OID</button>
+
+    <div id="results"></div>
+</div>
+
+<script src="~/js/oid-browser.js"></script>
