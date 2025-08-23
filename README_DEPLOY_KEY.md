@@ -1,4 +1,4 @@
-### GitHub Deploy Key Setup (Write Access) for NetPulse
+# GitHub Deploy Key Setup (Write Access)
 
 1) Generate deploy key
 ssh-keygen -t ed25519 -C "pulsnet-deploy" -f ~/.ssh/pulsnet_netpulse -N ""
@@ -24,7 +24,5 @@ chmod 600 ~/.ssh/config
 
 4) Point remote to SSH and test
 git remote set-url origin git@github.com:ShaneSerrao/NetPulse.git
-# or: git remote set-url origin github.com-netpulse:ShaneSerrao/NetPulse.git
 git fetch --all
 ssh -T git@github.com
-# or: ssh -T github.com-netpulse

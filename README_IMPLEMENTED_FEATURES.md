@@ -1,0 +1,28 @@
+# PulsNet – Implemented Features (V0.7+)
+
+- Roles/Auth: SuperAdmin, Admin, Operator, Viewer; cookie sessions; brute-force lockout; optional 2FA (off by default).
+- Security: HTTPS toggle (config), rate limiting, hardened security headers.
+- Config: Single secure JSON for DB/SMTP/theme/polling; read by all services.
+- Devices: CRUD; per-device interface_index; per-device caps (down/up toggles + Mbps values).
+- Monitoring: Ping; SNMP ifHCIn/ifHCOut (64-bit) deltas; caching; accurate down/up; usage uses caps or link speed.
+- Offline: Dedicated page; email alerts triggered on state transitions (online → offline).
+- Settings GUI:
+  - Theme: colors editor; Dark/Light toggle (applies globally).
+  - Polling: global interval, cache seconds, offline threshold.
+  - Layout: “Reset to default layout” toggle.
+  - Cards: drag-and-drop reorder; per-card density (compact/detailed), field visibility toggles; reset to default.
+- Dashboard:
+  - Cards with animated bar; masked IP (15s reveal); link-usage; device card click opens overlay with selected OIDs.
+- Device Management (GUI-driven; SuperAdmin/Admin):
+  - Actions: ApplyTemplate, RunScript, FirmwareUpdate (staged w/ rollback), UpdateInterface/VLAN/Queue/VPN, ValidateChanges, Rollback.
+  - Queue: progress tracking; bulk by tenant and device multi-select; full audit (ConfigHistory).
+- Templates/Scripts: CRUD, versioning, tenant scope; rollback; secure script execution w/ logs.
+- MIBs:
+  - Server-side snmpwalk (base OID + IP); categorization into MIB categories; add to catalog; attach OIDs to devices; overlays display those metrics.
+- Tenants: CRUD; assign devices; filter dashboards and bulk ops by tenant.
+- Geo Map & Sites: CRUD (address, lat, lon); device-to-site mapping; interactive pin-drop; filters.
+- Background Workers:
+  - Polling loop: ingest metrics, offline detection, email.
+  - Action queue processor: executes actions, tracks progress, writes audit, supports rollback.
+- Database:
+  - Base schema + v0.7 extensions: tenants, templates, scripts, action queue, config history, MIB catalog, sites, interface_index and per-device caps.
