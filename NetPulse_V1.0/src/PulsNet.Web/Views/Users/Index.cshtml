@@ -1,0 +1,22 @@
+@model IEnumerable<PulsNet.Web.Models.ApplicationUser>
+<div style="padding:24px">
+<h1>Users</h1>
+<p><a href="/Users/Create" style="color:#aeb9ff">+ Add User</a></p>
+<table style="width:100%;border-collapse:collapse">
+<thead><tr><th>Email</th><th>TwoFactor</th><th>Actions</th></tr></thead>
+<tbody>
+@foreach (var u in Model){
+<tr>
+  <td>@u.Email</td><td>@u.TwoFactorEnabled</td>
+  <td>
+    <a href="/Users/Edit/@u.Id" style="color:#c6d2ff">Edit</a>
+    <form method="post" action="/Users/Delete/@u.Id" style="display:inline" onsubmit="return confirm('Delete user?');">
+      @Html.AntiForgeryToken()
+      <button type="submit">Delete</button>
+    </form>
+  </td>
+</tr>
+}
+</tbody>
+</table>
+</div>

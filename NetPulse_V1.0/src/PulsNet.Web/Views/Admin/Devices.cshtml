@@ -1,0 +1,37 @@
+@model IEnumerable<PulsNet.Web.Models.Device>
+@{
+    ViewData["Title"] = "Devices";
+}
+<div style="padding:24px">
+    <h1>Devices</h1>
+    <p><a href="/Admin/CreateDevice" style="color:#aeb9ff">+ Add Device</a></p>
+    <table style="width:100%;border-collapse:collapse">
+        <thead>
+            <tr style="text-align:left;border-bottom:1px solid #2a335e">
+                <th>Client</th>
+                <th>Circuit</th>
+                <th>IP</th>
+                <th>SNMP</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var d in Model)
+        {
+            <tr style="border-bottom:1px solid #1b2346">
+                <td>@d.ClientName</td>
+                <td>@d.CircuitNumber</td>
+                <td>@d.IpAddress</td>
+                <td>@d.SnmpCommunity:@d.SnmpPort</td>
+                <td>
+                    <a href="/Admin/EditDevice/@d.Id" style="color:#c6d2ff">Edit</a>
+                    <form method="post" action="/Admin/DeleteDevice/@d.Id" style="display:inline" onsubmit="return confirm('Delete device?');">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" style="background:#6b2233;color:#fff;border:none;border-radius:6px;padding:4px 8px;margin-left:8px">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
