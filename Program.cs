@@ -64,6 +64,9 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// WebSockets for terminal
+app.UseWebSockets();
+
 // Seed default admin if no users exist (one-time)
 using (var scope = app.Services.CreateScope())
 {
@@ -84,6 +87,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.MapControllers();
+app.Map("/ws/terminal", PulsNet.Controllers.TerminalWebSocket.Handle);
 app.MapGet("/api/health", () => Results.Ok(new { status = "ok" }));
 app.Run();
 

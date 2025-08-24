@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Terminal</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/terminal.js"></script>
+  <script defer src="/app.js"></script>
+</head>
+<body>
+<div class="container">
+<header class="topbar">
+  <div class="brand">PulsNet</div>
+  <nav>
+    <a href="/index.html">Dashboard</a>
+    <div class="admin-menu">
+      <button id="adminMenuBtn">Admin</button>
+      <div id="adminSub" class="submenu">
+        <a href="/admin.html">Admin Home</a>
+        <a href="/devices.html">Devices</a>
+        <a href="/management.html">Management</a>
+        <a href="/mibs.html">MIBs</a>
+        <a href="/sites.html">Sites</a>
+        <a href="/tenants.html">Tenants</a>
+        <a href="/users.html">Users</a>
+        <a href="/templates.html">Templates</a>
+        <a href="/settings.html">Settings</a>
+        <a href="/terminal.html">Terminal</a>
+      </div>
+    </div>
+    <span class="spacer"></span>
+    <button id="logoutBtn">Logout</button>
+  </nav>
+</header>
+
+<main class="grid two">
+  <section class="card">
+    <h2>Connect</h2>
+    <label>Protocol
+      <select id="proto">
+        <option value="ssh">SSH</option>
+        <option value="telnet">Telnet</option>
+      </select>
+    </label>
+    <label>Host <input id="host" placeholder="10.0.0.1"></label>
+    <label>User <input id="user" placeholder="admin"></label>
+    <button id="connect" class="btn">Connect</button>
+  </section>
+
+  <section class="card" style="grid-column:1/-1">
+    <h2>Session</h2>
+    <pre id="term" style="min-height:360px;max-height:60vh;overflow:auto;background:rgba(0,0,0,.35);padding:12px;border-radius:8px"></pre>
+    <input id="input" placeholder="type and press Enter" style="width:100%;margin-top:8px">
+  </section>
+</main>
+
+</div>
+</body>
+</html>
+
