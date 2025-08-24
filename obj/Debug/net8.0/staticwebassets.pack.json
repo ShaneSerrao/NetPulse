@@ -1,0 +1,229 @@
+{
+  "Files": [
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/admin.html",
+      "PackagePath": "staticwebassets/admin.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/admin.js",
+      "PackagePath": "staticwebassets/admin.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/admin.tmp",
+      "PackagePath": "staticwebassets/admin.tmp"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/app.js",
+      "PackagePath": "staticwebassets/app.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/app.js.original.bkp",
+      "PackagePath": "staticwebassets/app.js.original.bkp"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/devices.html.bak.1756016778",
+      "PackagePath": "staticwebassets/backups/devices.html.bak.1756016778"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/devices.html.bak.1756016951",
+      "PackagePath": "staticwebassets/backups/devices.html.bak.1756016951"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/devices.html.bak.20250824-081242",
+      "PackagePath": "staticwebassets/backups/devices.html.bak.20250824-081242"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/devices.js.bak.1756016778",
+      "PackagePath": "staticwebassets/backups/devices.js.bak.1756016778"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/devices.js.bak.1756016951",
+      "PackagePath": "staticwebassets/backups/devices.js.bak.1756016951"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/devices.js.bak.20250824-081242",
+      "PackagePath": "staticwebassets/backups/devices.js.bak.20250824-081242"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/management.html.bak.1756016778",
+      "PackagePath": "staticwebassets/backups/management.html.bak.1756016778"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/management.js.bak.1756016778",
+      "PackagePath": "staticwebassets/backups/management.js.bak.1756016778"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/mibs.html.bak.1756014989",
+      "PackagePath": "staticwebassets/backups/mibs.html.bak.1756014989"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/mibs.html.bak.1756016778",
+      "PackagePath": "staticwebassets/backups/mibs.html.bak.1756016778"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/mibs.js.bak.1756014989",
+      "PackagePath": "staticwebassets/backups/mibs.js.bak.1756014989"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/mibs.js.bak.1756016778",
+      "PackagePath": "staticwebassets/backups/mibs.js.bak.1756016778"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/sites.html.bak.1756016385",
+      "PackagePath": "staticwebassets/backups/sites.html.bak.1756016385"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/sites.html.bak.1756016510",
+      "PackagePath": "staticwebassets/backups/sites.html.bak.1756016510"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/sites.html.bak.1756016778",
+      "PackagePath": "staticwebassets/backups/sites.html.bak.1756016778"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/sites.html.bak.1756016951",
+      "PackagePath": "staticwebassets/backups/sites.html.bak.1756016951"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/sites.js.bak.1756016385",
+      "PackagePath": "staticwebassets/backups/sites.js.bak.1756016385"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/sites.js.bak.1756016510",
+      "PackagePath": "staticwebassets/backups/sites.js.bak.1756016510"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/sites.js.bak.1756016778",
+      "PackagePath": "staticwebassets/backups/sites.js.bak.1756016778"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/sites.js.bak.1756016951",
+      "PackagePath": "staticwebassets/backups/sites.js.bak.1756016951"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/tenants.html.bak.1756016778",
+      "PackagePath": "staticwebassets/backups/tenants.html.bak.1756016778"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/backups/tenants.js.bak.1756016778",
+      "PackagePath": "staticwebassets/backups/tenants.js.bak.1756016778"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/devices.html",
+      "PackagePath": "staticwebassets/devices.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/devices.js",
+      "PackagePath": "staticwebassets/devices.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/devices.js.original.bkp",
+      "PackagePath": "staticwebassets/devices.js.original.bkp"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/index.html",
+      "PackagePath": "staticwebassets/index.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/login.html",
+      "PackagePath": "staticwebassets/login.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/login.js",
+      "PackagePath": "staticwebassets/login.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/management.html",
+      "PackagePath": "staticwebassets/management.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/management.js",
+      "PackagePath": "staticwebassets/management.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/management.js.original.bkp",
+      "PackagePath": "staticwebassets/management.js.original.bkp"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/mibs.html",
+      "PackagePath": "staticwebassets/mibs.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/mibs.js",
+      "PackagePath": "staticwebassets/mibs.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/releases/PulsNet_V7.2-latest_20250824-0210.zip",
+      "PackagePath": "staticwebassets/releases/PulsNet_V7.2-latest_20250824-0210.zip"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/scripts.html",
+      "PackagePath": "staticwebassets/scripts.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/scripts.js",
+      "PackagePath": "staticwebassets/scripts.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/settings.html",
+      "PackagePath": "staticwebassets/settings.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/settings.js",
+      "PackagePath": "staticwebassets/settings.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/sites.html",
+      "PackagePath": "staticwebassets/sites.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/sites.js",
+      "PackagePath": "staticwebassets/sites.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/styles.css",
+      "PackagePath": "staticwebassets/styles.css"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/templates.html",
+      "PackagePath": "staticwebassets/templates.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/templates.js",
+      "PackagePath": "staticwebassets/templates.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/tenants.html",
+      "PackagePath": "staticwebassets/tenants.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/tenants.js",
+      "PackagePath": "staticwebassets/tenants.js"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/users.html",
+      "PackagePath": "staticwebassets/users.html"
+    },
+    {
+      "Id": "/workspace/rebuilt/src/PulsNet/wwwroot/users.js",
+      "PackagePath": "staticwebassets/users.js"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.PulsNet.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.PulsNet.props",
+      "PackagePath": "build\\PulsNet.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.PulsNet.props",
+      "PackagePath": "buildMultiTargeting\\PulsNet.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.PulsNet.props",
+      "PackagePath": "buildTransitive\\PulsNet.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PulsNet Dashboard</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">PulsNet</div>
+      <nav>
+        <a href="/index.html">Dashboard</a>
+        <a href="/admin.html">Admin</a>
+        <a href="/devices.html">Devices</a>
+        <a href="/mibs.html">MIBs</a>
+        <a href="/sites.html">Sites</a>
+        <a href="/users.html">Users</a>
+        <a href="/tenants.html">Tenants</a>
+        <a href="/management.html">Management</a>
+        <span class="spacer"></span>
+        <button id="logoutBtn">Logout</button>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Devices</h1>
+
+      <!-- Tenant Filter -->
+      <div class="row" style="margin-bottom:8px">
+        <label>Tenant ID <input id="tenant" type="number" min="1" style="width:120px"></label>
+        <button id="applyTenant" class="btn">Filter</button>
+      </div>
+
+      <div id="devices" class="grid"></div>
+    </main>
+  </div>
+
+  <template id="card">
+    <div class="card hover">
+      <div class="row space">
+        <div class="title"></div>
+        <div class="dot" title="status"></div>
+      </div>
+      <div class="muted"><span class="circuit"></span></div>
+      <div class="ip masked"></div>
+      <div class="row">
+        <div>Down: <span class="down">0</span> Mbps</div>
+        <div>Up: <span class="up">0</span> Mbps</div>
+      </div>
+      <div class="row">
+        <div>Latency: <span class="latency">-</span> ms</div>
+      </div>
+      <div class="bar"><div class="bar-fill"></div></div>
+      <div class="row space"><button class="btn reveal">Reveal IP</button></div>
+    </div>
+  </template>
+
+  <!-- Overlay modal for dashboard drag-and-drop -->
+  <div id="overlay" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.7);align-items:center;justify-content:center;">
+    <div class="card" style="max-width:600px;width:90%;max-height:80vh;overflow:auto;position:relative">
+      <button id="closeOverlay" class="btn" style="position:absolute;top:8px;right:8px">Close</button>
+      <h3 id="ovTitle">Device</h3>
+      <div id="ovBody"></div>
+    </div>
+  </div>
+</body>
+</html>
