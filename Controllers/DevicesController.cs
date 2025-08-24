@@ -88,8 +88,34 @@ namespace PulsNet.Controllers
             var d = await _devs.Get(id);
             if (d == null) return NotFound();
 
-            // interface_index and caps read from v0.7 extensions when wired (default 1)
-            var res = await _mon.LiveStats(id, d.Ip, d.Comm, d.Max, 1);
+            // Read interface index and caps if available to provide accurate sampling and usage
+            var meta = await _db.One(
+                @"SELECT interface_index,
+                         cap_down_enabled, cap_down_mbps,
+                         cap_up_enabled,   cap_up_mbps
+                  FROM devices WHERE id=@id",
+                r => new
+                {
+                    ifx = r.IsDBNull(0) ? (int?)null : r.GetInt32(0),
+                    cden = r.IsDBNull(1) ? false : r.GetBoolean(1),
+                    cd = r.IsDBNull(2) ? (int?)null : r.GetInt32(2),
+                    cuen = r.IsDBNull(3) ? false : r.GetBoolean(3),
+                    cu = r.IsDBNull(4) ? (int?)null : r.GetInt32(4)
+                },
+                new { id }
+            );
+
+            var res = await _mon.LiveStats(
+                id,
+                d.Ip,
+                d.Comm,
+                d.Max,
+                meta?.ifx,
+                meta?.cd,
+                meta?.cden ?? false,
+                meta?.cu,
+                meta?.cuen ?? false
+            );
             return Ok(res);
         }
     }
