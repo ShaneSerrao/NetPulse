@@ -8,14 +8,20 @@
 <header class="topbar"><div class="brand">PulsNet</div>
 <nav>
   <a href="/index.html">Dashboard</a>
-  <a href="/admin.html">Admin</a>
-  <a href="/devices.html">Devices</a>
-  <a href="/mibs.html">MIBs</a>
-  <a href="/sites.html">Sites</a>
-  <a href="/users.html">Users</a>
-  <a href="/tenants.html">Tenants</a>
-  <a href="/management.html">Management</a>
-  <a href="/settings.html" class="active">Settings</a>
+  <div class="admin-menu">
+    <button id="adminMenuBtn">Admin</button>
+    <div id="adminSub" class="submenu">
+      <a href="/admin.html">Admin Home</a>
+      <a href="/devices.html">Devices</a>
+      <a href="/management.html">Management</a>
+      <a href="/mibs.html">MIBs</a>
+      <a href="/sites.html">Sites</a>
+      <a href="/tenants.html">Tenants</a>
+      <a href="/users.html">Users</a>
+      <a href="/templates.html">Templates</a>
+      <a href="/settings.html" class="active">Settings</a>
+    </div>
+  </div>
   <span class="spacer"></span>
   <button id="logoutBtn">Logout</button>
 </nav>
@@ -55,6 +61,52 @@
     <h2>Layout</h2>
     <p>Reset dashboard cards to default order and options.</p>
     <button id="resetLayout" class="btn">Reset to Default</button>
+  </section>
+
+  <section class="card">
+    <h2>Dashboard Customization (Advanced)</h2>
+    <div class="row">
+      <label style="flex:1">Layout Code
+        <textarea id="layoutCode" style="width:100%;height:180px"></textarea>
+      </label>
+    </div>
+    <div class="row">
+      <button id="saveLayout" class="btn">Save</button>
+      <button id="saveLayoutAs" class="btn">Save As...</button>
+      <button id="useSelectedLayout" class="btn">Use Selected</button>
+      <button id="deleteSelectedLayout" class="btn">Delete Selected</button>
+    </div>
+    <div>
+      <label>Saved Versions
+        <select id="layoutVersions" size="6" style="width:100%"></select>
+      </label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Device Defaults</h2>
+    <label>Default SNMP Community <input id="defComm" value="public"></label>
+    <label>Default Interface Index <input id="defIfx" type="number" min="1"></label>
+    <div class="row">
+      <label><input type="checkbox" id="defCden"> Default Cap Download</label>
+      <input id="defCd" type="number" placeholder="Mbps">
+    </div>
+    <div class="row">
+      <label><input type="checkbox" id="defCuen"> Default Cap Upload</label>
+      <input id="defCu" type="number" placeholder="Mbps">
+    </div>
+    <label><input type="checkbox" id="defAutoSpeed"> Auto-detect link speed on add</label>
+    <button id="saveDeviceDefaults" class="btn">Save Defaults</button>
+  </section>
+
+  <section class="card">
+    <h2>Notifications</h2>
+    <label>Usage Warning % <input id="nuWarn" type="number" min="0" max="100"></label>
+    <label>Usage Critical % <input id="nuCrit" type="number" min="0" max="100"></label>
+    <label>Latency Warning ms <input id="nlWarn" type="number" min="0"></label>
+    <label>Latency Critical ms <input id="nlCrit" type="number" min="0"></label>
+    <label>Offline Alert Delay s <input id="noDelay" type="number" min="0"></label>
+    <button id="saveNotifications" class="btn">Save Notifications</button>
   </section>
 </main>
 </div>

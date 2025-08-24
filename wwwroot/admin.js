@@ -57,6 +57,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('saveTheme').onclick = saveTheme;
   document.getElementById('savePolling').onclick = savePoll;
   document.getElementById('save2fa').onclick = save2fa;
+  // Admin submenu toggle
+  const btn=document.getElementById('adminMenuBtn'); const sub=document.getElementById('adminSub');
+  if(btn&&sub){ btn.onclick=(e)=>{ e.stopPropagation(); sub.classList.toggle('show'); }; document.addEventListener('click',()=> sub.classList.remove('show')); }
 });
 
 // Device caps (existing)

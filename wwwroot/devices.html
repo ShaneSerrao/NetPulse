@@ -14,27 +14,26 @@
   <div class="brand">PulsNet</div>
   <nav>
     <a href="/index.html">Dashboard</a>
-    <a href="/admin.html">Admin</a>
-    <a href="/devices.html">Devices</a>
-    <a href="/mibs.html">MIBs</a>
-    <a href="/sites.html">Sites</a>
-    <a href="/users.html">Users</a>
-    <a href="/tenants.html">Tenants</a>
-    <a href="/management.html">Management</a>
+    <div class="admin-menu">
+      <button id="adminMenuBtn">Admin</button>
+      <div id="adminSub" class="submenu">
+        <a href="/admin.html">Admin Home</a>
+        <a href="/devices.html">Devices</a>
+        <a href="/management.html">Management</a>
+        <a href="/mibs.html">MIBs</a>
+        <a href="/sites.html">Sites</a>
+        <a href="/tenants.html">Tenants</a>
+        <a href="/users.html">Users</a>
+        <a href="/templates.html">Templates</a>
+        <a href="/settings.html">Settings</a>
+      </div>
+    </div>
     <span class="spacer"></span>
     <button id="logoutBtn">Logout</button>
   </nav>
 </header>
 
 <main class="grid two">
-<div class="card">
-  <div class="row">
-    <label>Tenant
-      <select id="tenantSel"></select>
-    </label>
-    <button id="applyTenant" class="btn">Apply</button>
-  </div>
-</div>
 <div class="card">
   <div class="row">
     <label>Tenant
@@ -51,7 +50,14 @@
     <label>Circuit Number <input id="circuit"></label>
     <label>IP Address <input id="ip"></label>
     <label>SNMP Community <input id="comm" value="public"></label>
-    <label>Max Link (Mbps) <input id="max" type="number"></label>
+    <div class="row">
+      <label><input type="checkbox" id="capDownEn"> Max Download</label>
+      <input id="capDownMbps" type="number" placeholder="Mbps">
+    </div>
+    <div class="row">
+      <label><input type="checkbox" id="capUpEn"> Max Upload</label>
+      <input id="capUpMbps" type="number" placeholder="Mbps">
+    </div>
     <label>Interface Index <input id="ifx" type="number" min="1" placeholder="optional"></label>
     <button id="add" class="btn">Add</button>
   </section>

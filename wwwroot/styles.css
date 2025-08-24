@@ -46,3 +46,18 @@
 .topbar nav .spacer { 
     flex: 1; 
 }
+
+/* Admin submenu */
+.admin-menu { position: relative; }
+.admin-menu > button { background: transparent; color: var(--text); border: 1px solid transparent; padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+.admin-menu > button:hover { border-color: rgba(255,255,255,.18); }
+.submenu { position: absolute; top: 36px; left: 0; background: var(--surface); border: 1px solid rgba(255,255,255,.12); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,.25); padding: 8px; display: none; min-width: 220px; z-index: 20; }
+.submenu a { display: block; padding: 6px 8px; border-radius: 6px; color: var(--text); text-decoration: none; opacity: .9; }
+.submenu a:hover { opacity: 1; background: rgba(255,255,255,.06); }
+.submenu.show { display: block; }
+
+/* Card polish */
+.card { transition: transform .15s ease, box-shadow .15s ease; }
+
+/* Light theme variables applied by JS by toggling a class on html */
+.light-theme { --bg:#f6f7fb; --surface:#ffffff; --text:#111827; --primary:#2a3867; --accent:#4f46e5; }

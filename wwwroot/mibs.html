@@ -14,19 +14,49 @@
   <div class="brand">PulsNet</div>
   <nav>
     <a href="/index.html">Dashboard</a>
-    <a href="/admin.html">Admin</a>
-    <a href="/devices.html">Devices</a>
-    <a href="/mibs.html">MIBs</a>
-    <a href="/sites.html">Sites</a>
-    <a href="/users.html">Users</a>
-    <a href="/tenants.html">Tenants</a>
-    <a href="/management.html">Management</a>
+    <div class="admin-menu">
+      <button id="adminMenuBtn">Admin</button>
+      <div id="adminSub" class="submenu">
+        <a href="/admin.html">Admin Home</a>
+        <a href="/devices.html">Devices</a>
+        <a href="/management.html">Management</a>
+        <a href="/mibs.html">MIBs</a>
+        <a href="/sites.html">Sites</a>
+        <a href="/tenants.html">Tenants</a>
+        <a href="/users.html">Users</a>
+        <a href="/templates.html">Templates</a>
+        <a href="/settings.html">Settings</a>
+      </div>
+    </div>
     <span class="spacer"></span>
     <button id="logoutBtn">Logout</button>
   </nav>
 </header>
 
-`cat /tmp/new_mibs_main.html`
+<main class="grid two">
+  <section class="card">
+    <h2>SNMP Walk</h2>
+    <label>IP <input id="ip"></label>
+    <label>Community <input id="comm" value="public"></label>
+    <label>Base OID <input id="oid" value="1.3.6.1.2.1"></label>
+    <button id="walk" class="btn">Walk</button>
+    <pre id="out" style="max-height:320px;overflow:auto"></pre>
+  </section>
+
+  <section class="card">
+    <h2>Catalog & Attach</h2>
+    <div class="row">
+      <label>Catalog OID <input id="coid"></label>
+      <label>Name <input id="cname"></label>
+      <button id="add" class="btn">Add to Catalog</button>
+    </div>
+    <div class="row">
+      <label>Device <select id="devSel"></select></label>
+      <label>OIDs <select id="catSel" multiple size="8" style="min-width:200px"></select></label>
+      <button id="attach" class="btn">Attach to Device</button>
+    </div>
+  </section>
+</main>
 </div>
 </body>
 </html>

@@ -23,6 +23,9 @@ async function loadTheme() {
     const root = document.documentElement;
     root.style.setProperty('--primary', t.primary || t.Primary);
     root.style.setProperty('--accent', t.accent || t.Accent);
+    // Apply mode
+    const mode = (t.name||t.Name||'dark').toLowerCase();
+    if(mode==='light') root.classList.add('light-theme'); else root.classList.remove('light-theme');
   } catch {}
 }
 
@@ -52,7 +55,15 @@ async function runDashboard() {
 
   container.innerHTML = '';
 
-  const order = JSON.parse(localStorage.getItem('cardOrder') || '[]');
+  // Load saved order from server (fallback to localStorage)
+  let order = [];
+  try {
+    const srv = await j('/api/layout/cards');
+    order = Array.isArray(srv.ids) ? srv.ids : [];
+  } catch {}
+  if (!order.length) {
+    try { order = JSON.parse(localStorage.getItem('cardOrder') || '[]'); } catch {}
+  }
   const byId = new Map(list.map(d => [d.id, d]));
   const ordered = [...order.map(id => byId.get(id)).filter(Boolean), ...list.filter(d => !order.includes(d.id))];
 
@@ -141,6 +152,7 @@ async function runDashboard() {
   function saveOrder() {
     const ids = [...container.querySelectorAll('.card')].map(el => +el.dataset.id);
     localStorage.setItem('cardOrder', JSON.stringify(ids));
+    fetch('/api/layout/cards', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify({ ids }) }).catch(()=>{});
   }
 
   // Logout
@@ -176,17 +188,55 @@ async function loadDevices() {
 }
 
 document.getElementById('add')?.addEventListener('click', async () => {
+  const nameEl = document.getElementById('client');
+  const circEl = document.getElementById('circuit');
+  const ipEl = document.getElementById('ip');
+  const commEl = document.getElementById('comm');
+  const ifxEl = document.getElementById('ifx');
+  const capDownEn = document.getElementById('capDownEn');
+  const capDownMbps = document.getElementById('capDownMbps');
+  const capUpEn = document.getElementById('capUpEn');
+  const capUpMbps = document.getElementById('capUpMbps');
+  const maxEl = document.getElementById('max');
+
+  const cdEnabled = capDownEn && capDownEn.checked;
+  const cuEnabled = capUpEn && capUpEn.checked;
+  const cdVal = capDownMbps && capDownMbps.value ? +capDownMbps.value : null;
+  const cuVal = capUpMbps && capUpMbps.value ? +capUpMbps.value : null;
+
+  // Compute Max link as the larger of caps if provided, else use explicit Max input if present
+  let maxLink = 0;
+  if (cdEnabled && typeof cdVal === 'number') maxLink = Math.max(maxLink, cdVal || 0);
+  if (cuEnabled && typeof cuVal === 'number') maxLink = Math.max(maxLink, cuVal || 0);
+  if (!maxLink && maxEl && maxEl.value) maxLink = +maxEl.value;
+
   const body = {
-    ClientName: client.value.trim(),
-    Circuit: circuit.value.trim(),
-    Ip: ip.value.trim(),
-    Comm: comm.value.trim(),
-    Max: +max.value,
+    ClientName: nameEl.value.trim(),
+    Circuit: circEl.value.trim(),
+    Ip: ipEl.value.trim(),
+    Comm: commEl.value.trim(),
+    Max: maxLink,
     Interval: null
   };
+
   const r = await j('/api/devices', { method:'POST', body: JSON.stringify(body) });
-  if(ifx.value) await j(`/api/devices/${r.id}/interface-index`, { method:'POST', body: JSON.stringify({ interfaceIndex: +ifx.value }) });
-  await loadDevices();
+
+  if (ifxEl && ifxEl.value) {
+    await j(`/api/devices/${r.id}/interface-index`, { method:'POST', body: JSON.stringify({ interfaceIndex: +ifxEl.value }) });
+  }
+  if (cdEnabled || cuEnabled) {
+    await j(`/api/devices/${r.id}/caps`, {
+      method:'POST',
+      body: JSON.stringify({
+        capDownEnabled: !!cdEnabled,
+        capDownMbps: cdVal,
+        capUpEnabled: !!cuEnabled,
+        capUpMbps: cuVal
+      })
+    });
+  }
+
+  if (typeof loadDevices === 'function') await loadDevices();
 });
 
 // --- Management Page Device Picker & Actions ---
@@ -228,9 +278,34 @@ document.addEventListener('DOMContentLoaded', () => {
     if(a.getAttribute('href') === path) a.classList.add('active');
   });
 
+  // Admin submenu toggle (present on most pages)
+  const btn=document.getElementById('adminMenuBtn'); const sub=document.getElementById('adminSub');
+  if(btn&&sub){ btn.onclick=(e)=>{ e.stopPropagation(); sub.classList.toggle('show'); }; document.addEventListener('click',()=> sub.classList.remove('show')); }
+
   // Attach universal logout handler
   const lb = document.getElementById('logoutBtn');
   if(lb) lb.onclick = async () => { await fetch('/api/auth/logout', {method:'POST', credentials:'include'}); location.href='/login.html'; };
+
+  // Theme toggle button (sun/moon)
+  (function ensureThemeToggle(){
+    let tgl = document.getElementById('themeToggle');
+    const nav = document.querySelector('.topbar nav .spacer')?.parentElement;
+    if(!tgl && nav){
+      tgl = document.createElement('button'); tgl.id = 'themeToggle'; tgl.className='btn'; tgl.title='Toggle Theme';
+      tgl.style.background='transparent'; tgl.style.color='var(--text)'; tgl.style.border='1px solid rgba(255,255,255,.12)';
+      nav.insertBefore(tgl, nav.querySelector('#logoutBtn'));
+    }
+    if(tgl){
+      const root = document.documentElement;
+      const syncIcon = ()=>{ const light = root.classList.contains('light-theme'); tgl.textContent = light? '☀️':'🌙'; };
+      syncIcon();
+      tgl.onclick = async ()=>{
+        const light = root.classList.toggle('light-theme'); syncIcon();
+        const Name = light? 'light':'dark';
+        await fetch('/api/settings/theme',{ method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify({ Name }) }).catch(()=>{});
+      };
+    }
+  })();
 
   // Load devices if on devices page
   if(document.getElementById('list')) loadDevices();
