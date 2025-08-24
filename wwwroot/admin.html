@@ -6,6 +6,7 @@
   <title>Management</title>
   <link rel="stylesheet" href="/styles.css">
   <script defer src="/admin.js"></script>
+  <script defer src="/app.js"></script>
 </head>
 <body>
   <div class="container">
@@ -13,13 +14,20 @@
       <div class="brand">PulsNet</div>
       <nav>
         <a href="/index.html">Dashboard</a>
-        <a href="/admin.html">Admin</a>
-        <a href="/devices.html">Devices</a>
-        <a href="/mibs.html">MIBs</a>
-        <a href="/sites.html">Sites</a>
-        <a href="/users.html">Users</a>
-        <a href="/tenants.html">Tenants</a>
-        <a href="/management.html">Management</a>
+        <div class="admin-menu">
+          <button id="adminMenuBtn">Admin</button>
+          <div id="adminSub" class="submenu">
+            <a href="/admin.html">Admin Home</a>
+            <a href="/devices.html">Devices</a>
+            <a href="/management.html">Management</a>
+            <a href="/mibs.html">MIBs</a>
+            <a href="/sites.html">Sites</a>
+            <a href="/tenants.html">Tenants</a>
+            <a href="/users.html">Users</a>
+            <a href="/templates.html">Templates</a>
+            <a href="/settings.html">Settings</a>
+          </div>
+        </div>
         <span class="spacer"></span>
         <button id="logoutBtn">Logout</button>
       </nav>
@@ -45,6 +53,47 @@
         <button id="fwBtn" class="btn">Firmware Update</button>
 
         <div id="out"></div>
+      </section>
+
+      <!-- Add Device Form -->
+      <section class="card">
+        <h2>Add Device</h2>
+        <label>Client Name <input id="client"></label>
+        <label>Circuit Number <input id="circuit"></label>
+        <label>IP Address <input id="ip"></label>
+        <label>SNMP Community <input id="comm" value="public"></label>
+        <label>Interface Index <input id="ifx" type="number" min="1" placeholder="optional"></label>
+        <div class="row">
+          <label><input type="checkbox" id="capDownEn"> Max Download</label>
+          <input id="capDownMbps" type="number" placeholder="Mbps">
+        </div>
+        <div class="row">
+          <label><input type="checkbox" id="capUpEn"> Max Upload</label>
+          <input id="capUpMbps" type="number" placeholder="Mbps">
+        </div>
+        <button id="add" class="btn">Add</button>
+      </section>
+
+      <!-- Device List -->
+      <section class="card">
+        <h2>Devices</h2>
+        <div id="list"></div>
+      </section>
+
+      <!-- Device Caps & Interface -->
+      <section class="card">
+        <h2>Device Caps & Interface</h2>
+        <label>Device ID <input id="did" type="number"></label>
+        <label>Interface Index <input id="ifx" type="number" min="1"></label>
+        <div class="row">
+          <label><input type="checkbox" id="cden"> Cap Download</label>
+          <input id="cd" type="number" placeholder="Mbps">
+        </div>
+        <div class="row">
+          <label><input type="checkbox" id="cuen"> Cap Upload</label>
+          <input id="cu" type="number" placeholder="Mbps">
+        </div>
+        <button id="applyCaps" class="btn">Apply</button>
       </section>
 
       <!-- Settings Card -->

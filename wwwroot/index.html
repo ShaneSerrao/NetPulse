@@ -13,20 +13,27 @@
       <div class="brand">PulsNet</div>
       <nav>
         <a href="/index.html">Dashboard</a>
-        <a href="/admin.html">Admin</a>
-        <a href="/devices.html">Devices</a>
-        <a href="/mibs.html">MIBs</a>
-        <a href="/sites.html">Sites</a>
-        <a href="/users.html">Users</a>
-        <a href="/tenants.html">Tenants</a>
-        <a href="/management.html">Management</a>
+        <div class="admin-menu">
+          <button id="adminMenuBtn">Admin</button>
+          <div id="adminSub" class="submenu">
+            <a href="/admin.html">Admin Home</a>
+            <a href="/devices.html">Devices</a>
+            <a href="/management.html">Management</a>
+            <a href="/mibs.html">MIBs</a>
+            <a href="/sites.html">Sites</a>
+            <a href="/tenants.html">Tenants</a>
+            <a href="/users.html">Users</a>
+            <a href="/templates.html">Templates</a>
+            <a href="/settings.html">Settings</a>
+          </div>
+        </div>
         <span class="spacer"></span>
         <button id="logoutBtn">Logout</button>
       </nav>
     </header>
 
     <main>
-      <h1>Devices</h1>
+      <h1>Dashboard</h1>
 
       <!-- Tenant Filter -->
       <div class="row" style="margin-bottom:8px">
