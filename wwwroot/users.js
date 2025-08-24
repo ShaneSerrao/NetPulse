@@ -30,3 +30,27 @@ document.getElementById('create').onclick = async () => {
 };
 
 window.addEventListener('DOMContentLoaded', load);
+
+// 2FA setup/verify/disable
+async function g(u){ const r=await fetch(u,{credentials:'include'}); if(!r.ok) throw 0; return r.json(); }
+async function p(u,b){ const r=await fetch(u,{method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body:JSON.stringify(b)}); if(!r.ok) throw 0; return r.json().catch(()=>({})); }
+
+document.getElementById('setup2fa')?.addEventListener('click', async ()=>{
+  const id = +document.getElementById('uid2fa').value; if(!id) return;
+  const r = await p(`/api/users/${id}/2fa/setup`,{});
+  const info = document.getElementById('otpInfo');
+  info.innerHTML = `Secret: <b>${r.secret||r.Secret}</b><br>Scan URI: <span class="muted">${r.otpAuthUri||r.OtpAuthUri}</span>`;
+});
+
+document.getElementById('verify2fa')?.addEventListener('click', async ()=>{
+  const id = +document.getElementById('uid2fa').value; if(!id) return;
+  const code = document.getElementById('otpCode').value.trim(); if(!code) return;
+  await p(`/api/users/${id}/2fa/verify`,{ Code: code });
+  alert('2FA enabled');
+});
+
+document.getElementById('disable2fa')?.addEventListener('click', async ()=>{
+  const id = +document.getElementById('uid2fa').value; if(!id) return;
+  await p(`/api/users/${id}/2fa/disable`,{});
+  alert('2FA disabled');
+});

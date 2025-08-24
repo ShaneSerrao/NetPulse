@@ -23,6 +23,9 @@ async function loadTheme() {
     const root = document.documentElement;
     root.style.setProperty('--primary', t.primary || t.Primary);
     root.style.setProperty('--accent', t.accent || t.Accent);
+    // Apply mode
+    const mode = (t.name||t.Name||'dark').toLowerCase();
+    if(mode==='light') root.classList.add('light-theme'); else root.classList.remove('light-theme');
   } catch {}
 }
 
@@ -282,6 +285,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // Attach universal logout handler
   const lb = document.getElementById('logoutBtn');
   if(lb) lb.onclick = async () => { await fetch('/api/auth/logout', {method:'POST', credentials:'include'}); location.href='/login.html'; };
+
+  // Theme toggle button (sun/moon)
+  (function ensureThemeToggle(){
+    let tgl = document.getElementById('themeToggle');
+    const nav = document.querySelector('.topbar nav .spacer')?.parentElement;
+    if(!tgl && nav){
+      tgl = document.createElement('button'); tgl.id = 'themeToggle'; tgl.className='btn'; tgl.title='Toggle Theme';
+      tgl.style.background='transparent'; tgl.style.color='var(--text)'; tgl.style.border='1px solid rgba(255,255,255,.12)';
+      nav.insertBefore(tgl, nav.querySelector('#logoutBtn'));
+    }
+    if(tgl){
+      const root = document.documentElement;
+      const syncIcon = ()=>{ const light = root.classList.contains('light-theme'); tgl.textContent = light? '☀️':'🌙'; };
+      syncIcon();
+      tgl.onclick = async ()=>{
+        const light = root.classList.toggle('light-theme'); syncIcon();
+        const Name = light? 'light':'dark';
+        await fetch('/api/settings/theme',{ method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify({ Name }) }).catch(()=>{});
+      };
+    }
+  })();
 
   // Load devices if on devices page
   if(document.getElementById('list')) loadDevices();

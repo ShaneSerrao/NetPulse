@@ -14,13 +14,20 @@
   <div class="brand">PulsNet</div>
   <nav>
     <a href="/index.html">Dashboard</a>
-    <a href="/admin.html">Admin</a>
-    <a href="/devices.html">Devices</a>
-    <a href="/mibs.html">MIBs</a>
-    <a href="/sites.html">Sites</a>
-    <a href="/users.html">Users</a>
-    <a href="/tenants.html">Tenants</a>
-    <a href="/management.html">Management</a>
+    <div class="admin-menu">
+      <button id="adminMenuBtn">Admin</button>
+      <div id="adminSub" class="submenu">
+        <a href="/admin.html">Admin Home</a>
+        <a href="/devices.html">Devices</a>
+        <a href="/management.html">Management</a>
+        <a href="/mibs.html">MIBs</a>
+        <a href="/sites.html">Sites</a>
+        <a href="/tenants.html">Tenants</a>
+        <a href="/users.html">Users</a>
+        <a href="/templates.html">Templates</a>
+        <a href="/settings.html">Settings</a>
+      </div>
+    </div>
     <span class="spacer"></span>
     <button id="logoutBtn">Logout</button>
   </nav>
@@ -46,6 +53,20 @@
   <section class="card">
     <h2>User List</h2>
     <div id="list"></div>
+  </section>
+
+  <section class="card">
+    <h2>Two-Factor Auth (2FA)</h2>
+    <div class="row">
+      <label>User ID <input id="uid2fa" type="number"></label>
+      <button id="setup2fa" class="btn">Setup</button>
+    </div>
+    <div id="otpInfo" class="muted"></div>
+    <div class="row">
+      <label>Code <input id="otpCode" pattern="\\d{6}"></label>
+      <button id="verify2fa" class="btn">Verify & Enable</button>
+      <button id="disable2fa" class="btn">Disable</button>
+    </div>
   </section>
 </main>
 </div>

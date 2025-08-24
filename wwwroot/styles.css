@@ -58,3 +58,6 @@
 
 /* Card polish */
 .card { transition: transform .15s ease, box-shadow .15s ease; }
+
+/* Light theme variables applied by JS by toggling a class on html */
+.light-theme { --bg:#f6f7fb; --surface:#ffffff; --text:#111827; --primary:#2a3867; --accent:#4f46e5; }
